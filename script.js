@@ -2,8 +2,9 @@ let books = null;
 let addBook = null;
 let overlay = null;
 let modal = null;
+let submitBtn = null;
 
-const myLibrary = [
+let myLibrary = [
     {
         title: "Harry Potter",
         author: "J.K. Rowling",
@@ -29,11 +30,15 @@ function addBookToLibrary(book) {
     myLibrary.push(book);
 }
 
+// Display all books and its information in body
 function displayBooks() {
     for (const [i, literature] of myLibrary.entries()) {
         const book = document.createElement("div");
         book.classList.add("book");
         for (const prop in literature) {
+            if (prop == "read") {
+                continue;
+            }
             book.innerHTML += `${prop}: ${literature[prop]}` + "<br>";
         }
 
@@ -52,9 +57,9 @@ function displayBooks() {
             toggleReadStatus(readStatus, i);
         };
 
-        books.appendChild(book);
         book.appendChild(readStatus);
         book.appendChild(remove);
+        books.appendChild(book);
     }
 }
 
@@ -85,4 +90,23 @@ window.onload = () => {
         }; 
     };
 
+    submitBtn = document.querySelector("#submit");
+    const form = document.querySelector("form");
+    const newTitle = document.querySelector("#title");
+    const newAuthor = document.querySelector("#author");
+    const newPages = document.querySelector("#pages");
+    const newIsRead = document.querySelector("#isRead");
+    submitBtn.onclick = (event) => {
+        let newBook = new Book(newTitle.value, newAuthor.value, newPages.value, newIsRead.checked);
+        myLibrary.push(newBook);
+
+        books.innerHTML = "";
+        displayBooks();
+        event.preventDefault();
+
+        overlay.classList.remove("active");
+        modal.classList.remove("active");
+
+        form.reset();
+    };
 }
