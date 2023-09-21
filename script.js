@@ -36,28 +36,36 @@ function displayBooks() {
         for (const prop in literature) {
             book.innerHTML += `${prop}: ${literature[prop]}` + "<br>";
         }
+
         const remove = document.createElement("button");
         remove.textContent = "Remove";
         remove.onclick = () => {
             myLibrary.splice(i, 1);
             books.innerHTML = "";
             displayBooks();
-        }
+        };
+
         const readStatus = document.createElement("button");
-        readStatus.textContent = "Read";
+        toggleReadStatus(readStatus, i);
         readStatus.onclick = () => {
-             readStatus.classList.toggle("read");
-             toggleReadStatus(myLibrary[i]);
-        }
+            myLibrary[i].read = !myLibrary[i].read;
+            toggleReadStatus(readStatus, i);
+        };
+
         books.appendChild(book);
-        book.appendChild(readStatus)
+        book.appendChild(readStatus);
         book.appendChild(remove);
     }
 }
 
-function toggleReadStatus(book) {
-    book.read = !book.read;
-    console.log(book.read);
+function toggleReadStatus(readStatus, i) {
+    if (myLibrary[i].read) {
+        readStatus.textContent = "Read";
+        readStatus.classList.add("read");
+    } else {
+        readStatus.textContent = "Not Read";
+        readStatus.classList.remove("read")
+    }
 }
 
 window.onload = () => {
