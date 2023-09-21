@@ -8,6 +8,31 @@
     <script src="script.js"></script>
 </head>
 <body>
-    
+    <main>
+        <button id="add-book">+ Add Book</button>
+        <div id="books"></div>
+    </main>
+    <div class="modal">
+        <form action="" method="post">
+            <h3>Add new book</h3>
+            <ul>
+                <li>
+                    <input type="text" id="title" placeholder="Title">
+                </li>
+                <li>
+                    <input type="text" id="author" placeholder="Author">
+                </li>
+                <li>
+                    <input type="number" id="pages" placeholder="Number of Pages">
+                </li>
+                <li>
+                    <label for="isRead">Have you read it?</label>
+                    <input type="checkbox" id="isRead">
+                </li>
+            </ul>
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+    <div class="overlay"></div>
 </body>
 </html>
