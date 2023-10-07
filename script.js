@@ -31,8 +31,6 @@ class Book {
         this.pages = pages;
         this.read = read;
     }
-
-
 }
 
 function addBookToLibrary(title, author, pages, isRead) {
