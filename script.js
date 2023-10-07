@@ -19,15 +19,25 @@ let myLibrary = [
     }
 ];
 
-function Book(title, author, pages, read) {
-    this.title = title;
-    this.author = author;
-    this.pages = pages;
-    this.read = read;
+class Book {
+    constructor(
+        title = 'Unknown',
+        author = 'Unknown',
+        pages = 0,
+        read = false
+    ) {
+        this.title = title;
+        this.author = author;
+        this.pages = pages;
+        this.read = read;
+    }
+
+
 }
 
-function addBookToLibrary(book) {
-    myLibrary.push(book);
+function addBookToLibrary(title, author, pages, isRead) {
+    const newBook = new Book(title, author, pages, isRead);
+    myLibrary.push(newBook);
 }
 
 // Display all books and its information in body
@@ -97,8 +107,7 @@ window.onload = () => {
     const newPages = document.querySelector("#pages");
     const newIsRead = document.querySelector("#isRead");
     submitBtn.onclick = (event) => {
-        let newBook = new Book(newTitle.value, newAuthor.value, newPages.value, newIsRead.checked);
-        myLibrary.push(newBook);
+        addBookToLibrary(newTitle.value, newAuthor.value, newPages.value, newIsRead.checked);
 
         books.innerHTML = "";
         displayBooks();
